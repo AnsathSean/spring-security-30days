@@ -9,6 +9,7 @@ public class DemoController {
     @GetMapping("/public/hello")
     public String publicHello() { return "Hello (public)"; }
 
+    
     @GetMapping("/api/profile")
     public String profile() { return "This is a protected resource (Basic Auth)"; }
 }
