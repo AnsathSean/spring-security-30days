@@ -12,7 +12,7 @@
 
 本專案的目標是讓讀者從 **最基礎的 Basic Auth** 開始，  
 一路理解 **Session / Token / JWT / OAuth2 / OIDC / SAML** 的概念，  
-最終完成一個具備 **RBAC + ABAC + Scope** 的「企業級權限系統雛型」。  
+最終完成一個具備 **RBAC + ABAC + Scope** 的「權限系統雛型」。  
 
 特色：
 - 每個 branch 對應到課程中的一個成果階段  
