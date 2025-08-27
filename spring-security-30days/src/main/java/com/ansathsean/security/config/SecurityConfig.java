@@ -13,7 +13,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class SecurityConfig {
 
-    // 定義使用者 (存在記憶體)
     @Bean
     UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(
