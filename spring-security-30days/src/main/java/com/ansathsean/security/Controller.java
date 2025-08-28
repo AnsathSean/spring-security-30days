@@ -2,6 +2,9 @@ package com.ansathsean.security;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 public class Controller {
@@ -24,5 +27,13 @@ public class Controller {
     @GetMapping("/admin")
     public String adminPage() {
         return "這是 ADMIN 才能看到的頁面";
+    }
+    
+    @GetMapping("/me")
+    public String getSessionInfo(HttpSession session) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return "SessionId: " + session.getId() +
+               " | User: " + auth.getName() +
+               " | Roles: " + auth.getAuthorities();
     }
 }
