@@ -8,26 +8,31 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
 	
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        		.formLogin(form -> form.disable()) 
-				.csrf(csrf -> csrf.disable())    
-                .authorizeHttpRequests(auth -> auth
-                				.requestMatchers("/", "/api/login", "/login-with-refresh").permitAll()
-                                .anyRequest().authenticated()
-                )
-                .oauth2Login(withDefaults()) // 啟用 OIDC Login
-        		.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // ✅ 本地 JWT 登入
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/api/login", "/login-with-refresh").permitAll()
+                .anyRequest().authenticated()
+            )
+            .oauth2Login(withDefaults())
+            .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((req, res, authEx) -> {
+                    res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    res.getWriter().write("Unauthorized: " + authEx.getMessage());
+                })
+            );
 
         return http.build();
     }

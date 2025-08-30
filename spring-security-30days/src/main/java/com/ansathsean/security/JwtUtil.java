@@ -11,10 +11,10 @@ public class JwtUtil {
     private static final String SECRET = "mySecretKeymySecretKeymySecretKeymySecretKey"; // >=32 bytes
     private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
-    public static String generateAccessToken(String username, String role) {
+    public static String generateAccessToken(String username, String role, String scope) {
         return Jwts.builder()
                 .setSubject(username)
-                .addClaims(Map.of("role", role))
+                .addClaims(Map.of("role", role, "scope", scope))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 60 * 1000)) // 1 分鐘
                 .signWith(key, SignatureAlgorithm.HS256)
