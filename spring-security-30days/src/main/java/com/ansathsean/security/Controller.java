@@ -11,9 +11,9 @@ public class Controller {
 
     @GetMapping("/")
     public String home() {
-        return "這是公開頁面，任何人都能看到";
+        return "Welcome to iT鐵人賽系列文！";
     }
-
+    
     @GetMapping("/public")
     public String publicPage() {
         return "這也是公開 API";
