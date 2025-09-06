@@ -27,6 +27,7 @@
 |-------------|----------|------|
 | `day04-basic-auth` | Basic Authentication | 最簡單的 in-memory 帳號密碼驗證 |
 | `day06-cookie-session` | Session (Cookie Based Auth) | 使用 JSESSIONID 驗證登入狀態 |
+| `day10-ManualJWT` | Java 手動實作 JWT | 使用 Java 手動實作 JWT |
 | `day12-jwt-security` | JWT 整合 Spring Security | 登入 API → 發 JWT → Filter 驗證 |
 | `day20-oidc-google-login` | OIDC (Google 登入) | 使用 Google OIDC 登入並驗證 ID Token |
 | `day27-case1-jwt-oidc` | 專案案例 Part 1 | 本地帳號 (JWT) + Google OIDC 整合 |
