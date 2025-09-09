@@ -24,7 +24,9 @@ public class SecurityConfig {
                 				.requestMatchers("/", "/login", "/login-with-refresh").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .oauth2Login(withDefaults()) // 啟用 OIDC Login
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/hello-oidc", true) // 登入成功強制導到這裡
+                        ) // 啟用 OIDC Login
         		.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // ✅ 本地 JWT 登入
 
         return http.build();
